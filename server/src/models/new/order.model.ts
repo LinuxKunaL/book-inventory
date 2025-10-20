@@ -51,6 +51,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       default: "Pending",
     },
+    isDoneDelivery: {
+      type: Boolean,
+      default: false,
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

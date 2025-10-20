@@ -54,8 +54,27 @@ router.post("/updateOrder", async (req, res) => {
   try {
     await MOrder.findByIdAndUpdate(
       { _id: req.body.id },
-      { status: req.body.status }
+      {
+        status: req.body.status,
+        isDoneDelivery: req.body.status == "delivered",
+      }
     );
+    if (req.body.status === "delivered") {
+      const order = await MOrder.findById(req.body.id);
+
+      if (order && order.items?.length) {
+        // Loop through each item and decrement quantity by item.qty
+        const bulkOps = order.items.map((item) => ({
+          updateOne: {
+            filter: { _id: item.bookId },
+            update: { $inc: { quantity: -item.qty } },
+          },
+        }));
+
+        await MBook.bulkWrite(bulkOps);
+      }
+    }
+
     res.status(200).send({ message: "Order updated" });
   } catch (error) {
     console.log(error);
@@ -77,7 +96,7 @@ router.post("/createOrder", async (req: any, res) => {
 router.get("/getProprietorOrders", async (req: any, res) => {
   try {
     console.log(req.user);
-    
+
     const orders = await MOrder.find({ createdBy: req.user.id });
     res.status(200).send(orders);
   } catch (error) {
