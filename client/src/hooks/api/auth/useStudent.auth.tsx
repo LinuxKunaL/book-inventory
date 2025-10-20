@@ -115,7 +115,8 @@ function useStudentAuth() {
 
   const logout = () => {
     navigateTo("/");
-    localStorage.removeItem("token");
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("proprietorToken");
   };
 
   return {

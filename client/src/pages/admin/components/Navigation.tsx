@@ -90,7 +90,7 @@ function Navigation() {
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <p className="text-sm font-medium">Finteen</p>
+                      <p className="text-sm font-medium">Admin</p>
                     </div>
                   </div>
                   <div className="border-t-1 border-t-gray-700 p-4 w-full flex flex-col gap-3">

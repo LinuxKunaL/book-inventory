@@ -50,19 +50,6 @@ function Auth() {
     <form className="space-y-6" onSubmit={handleSubmit(submitFrom)}>
       <div className="flex gap-2 flex-col">
         <label className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium text-gray-700 dark:text-gray-300">
-          User Name: <span className="text-red-500">*</span>
-        </label>
-        <InputControlled
-          isRequired
-          name="fullname"
-          errors={errors}
-          register={register}
-          errorMessage="User name is required"
-          placeholder="Enter user name"
-        />
-      </div>
-      <div className="flex gap-2 flex-col">
-        <label className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium text-gray-700 dark:text-gray-300">
           Email: <span className="text-red-500">*</span>
         </label>
         <InputControlled

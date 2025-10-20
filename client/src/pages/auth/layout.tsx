@@ -17,7 +17,7 @@ const layout = () => {
             <p className="text-muted-foreground">Inventory Management System</p>
           </div>
           <section className="pb-10 mt-1 sm:mt-9 md:mt-16 w-full flex justify-center">
-            <div className=" w-full max-w-md relative overflow-hidden rounded-md  border-[1px] border-gray-700 bg-gradient-to-tl from-gray-800 to-gray-900">
+            <div className=" w-full max-w-md relative overflow-hidden rounded-md border-[1px] border-gray-200 dark:border-gray-700 bg-gradient-to-tl dark:from-gray-800 dark:to-gray-900">
               <div className="flex flex-col space-y-1.5 p-6 text-center pb-6">
                 <h3 className="tracking-tight text-2xl sm: font-bold text-gray-900 dark:text-white">
                   login
