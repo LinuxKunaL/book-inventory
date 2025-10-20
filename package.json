@@ -1,0 +1,9 @@
+{
+  "name": "book inventory",
+  "version": "1.0.0",
+  "description": "book inventory",
+  "scripts": {
+    "start:web": "cd client && npm run dev",
+    "start:server": "cd server && npm run dev"
+  }
+}

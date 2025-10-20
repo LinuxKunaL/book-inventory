@@ -1,0 +1,221 @@
+@import "tailwindcss";
+@import "@radix-ui/themes/styles.css";
+@custom-variant dark (&:where(.dark, .dark *));
+@plugin 'tailwind-scrollbar';
+* {
+  font-family: "Rubik", sans-serif !important;
+  scroll-behavior: smooth;
+
+  /* box-shadow: none !important; */
+}
+
+@theme {
+
+  --color-crimson-50: #fff0f2;
+--color-crimson-100: #ffe3e4;
+--color-crimson-200: #ffcbd1;
+--color-crimson-300: #ffa0aa;
+--color-crimson-400: #ff6b7e;
+--color-crimson-500: #fb3855;
+--color-crimson-600: #dc143c;
+--color-crimson-700: #c50b34;
+--color-crimson-800: #a50c33;
+--color-crimson-900: #8d0e33;
+--color-crimson-950: #4f0217;
+
+
+
+  --animate-zoom: zoom 2s ease-in-out infinite;
+  --animate-enter: enter 0.5s
+    linear(
+      0,
+      0.003 0.4%,
+      0.012 0.9%,
+      0.026 1.4%,
+      0.049 2%,
+      0.109 3.3%,
+      0.311 7.2%,
+      0.409 9.3%,
+      0.463 10.6%,
+      0.513 11.9%,
+      0.562 13.3%,
+      0.606 14.7%,
+      0.651 16.3%,
+      0.691 17.9%,
+      0.729 19.6%,
+      0.762 21.3%,
+      0.792 23.1%,
+      0.82 25%,
+      0.846 27%,
+      0.868 29.1%,
+      0.889 31.3%,
+      0.907 33.6%,
+      0.923 36.1%,
+      0.937 38.7%,
+      0.949 41.5%,
+      0.959 44.5%,
+      0.968 47.8%,
+      0.976 51.3%,
+      0.987 59.1%,
+      0.994 68.8%,
+      0.998 81.4%,
+      1
+    );
+  --animate-leave: leave 0.5s
+    linear(
+      0,
+      0.003 0.4%,
+      0.012 0.9%,
+      0.026 1.4%,
+      0.049 2%,
+      0.109 3.3%,
+      0.311 7.2%,
+      0.409 9.3%,
+      0.463 10.6%,
+      0.513 11.9%,
+      0.562 13.3%,
+      0.606 14.7%,
+      0.651 16.3%,
+      0.691 17.9%,
+      0.729 19.6%,
+      0.762 21.3%,
+      0.792 23.1%,
+      0.82 25%,
+      0.846 27%,
+      0.868 29.1%,
+      0.889 31.3%,
+      0.907 33.6%,
+      0.923 36.1%,
+      0.937 38.7%,
+      0.949 41.5%,
+      0.959 44.5%,
+      0.968 47.8%,
+      0.976 51.3%,
+      0.987 59.1%,
+      0.994 68.8%,
+      0.998 81.4%,
+      1
+    );
+
+  @keyframes zoom {
+    0% {
+      scale: 80%;
+    }
+    50% {
+      scale: 100%;
+    }
+    100% {
+      scale: 80%;
+    }
+  }
+}
+
+@keyframes enter {
+  from {
+    transform: scale(0.3);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes leave {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+}
+
+.react-datepicker__triangle {
+  @apply hidden;
+}
+
+.react-datepicker__month-container {
+  @apply dark:bg-transparent;
+}
+
+.react-datepicker__header {
+  @apply dark:!bg-gray-700 bg-white !border-none !flex !flex-col !gap-3;
+}
+.react-datepicker__header h2 {
+  @apply dark:text-gray-300 text-gray-700;
+}
+
+/* year dropdown */
+
+.react-datepicker__year-dropdown--scrollable {
+  @apply dark:!bg-gray-700 !bg-white scrollbar-none !border-gray-200 dark:!border-gray-500 p-2 space-y-2;
+}
+
+.react-datepicker__year-option {
+  @apply dark:!text-gray-300 text-gray-700 !rounded-lg !relative;
+}
+
+.react-datepicker__year-option:hover {
+  @apply dark:!bg-cyan-700 !bg-cyan-500 dark:!text-white !text-gray-100;
+}
+
+.react-datepicker__year-option--selected_year {
+  @apply dark:!bg-cyan-500 bg-cyan-600 dark:!text-white !text-gray-100;
+}
+
+/* year dropdown */
+
+.react-datepicker__day-names .react-datepicker__day-name {
+  @apply dark:!text-gray-300 !text-gray-700;
+}
+
+.react-datepicker__year-read-view--selected-year {
+  @apply dark:text-gray-300 text-gray-700;
+}
+
+.react-datepicker {
+  @apply !border-[1px] dark:!border-gray-600 !border-gray-200 !overflow-hidden shadow-lg shadow-gray-300/50 dark:shadow-gray-900/50 dark:!bg-gray-800/30 !bg-white backdrop-blur-lg;
+}
+
+.react-datepicker__week div {
+  @apply dark:!text-gray-300 !text-gray-700;
+}
+
+.react-datepicker__week div:hover {
+  @apply dark:!bg-cyan-700 !bg-cyan-500 dark:!text-white !text-gray-50;
+}
+
+.react-datepicker__day--keyboard-selected {
+  @apply dark:!bg-cyan-700 !bg-cyan-500 dark:!text-white !text-gray-100;
+}
+
+.react-datepicker__day--selected {
+  @apply dark:!bg-cyan-700 !bg-cyan-500 dark:!text-white !text-gray-100;
+}
+
+.react-datepicker__year-dropdown .react-datepicker__year-dropdown--scrollable {
+  @apply dark:!bg-gray-800 bg-white;
+}
+
+.ProseMirror-focused {
+  @apply focus:!outline-none  !border-none;
+}
+
+.tiptap h1 {
+  @apply text-3xl font-bold mb-2;
+}
+.tiptap h2 {
+  @apply text-2xl font-semibold mb-2;
+}
+.tiptap p {
+  @apply text-base leading-relaxed;
+}
+.tiptap ul {
+  @apply list-disc pl-6 space-y-1;
+}
+.tiptap ol {
+  @apply list-decimal pl-6 space-y-1;
+}
+.tiptap blockquote {
+  @apply border-l-4 border-gray-400 pl-4 italic text-gray-600;
+}

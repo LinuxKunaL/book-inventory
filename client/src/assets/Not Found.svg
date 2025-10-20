@@ -1,0 +1,76 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4" />
+      <stop offset="100%" style="stop-color:#10b981" />
+    </linearGradient>
+    <linearGradient id="searchGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6" />
+      <stop offset="100%" style="stop-color:#8b5cf6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="200" cy="150" r="140" fill="url(#bgGradient)" opacity="0.3"/>
+  
+  <!-- Floating decorative elements -->
+  <circle cx="80" cy="80" r="4" fill="#06b6d4" opacity="0.6">
+    <animate attributeName="cy" values="80;70;80" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="320" cy="100" r="3" fill="#10b981" opacity="0.7">
+    <animate attributeName="cy" values="100;90;100" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="350" cy="200" r="5" fill="#3b82f6" opacity="0.5">
+    <animate attributeName="cy" values="200;190;200" dur="3.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="50" cy="220" r="3" fill="#8b5cf6" opacity="0.6">
+    <animate attributeName="cy" values="220;210;220" dur="2.8s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Main 404 Text -->
+  <text x="200" y="180" font-family="Inter, system-ui, sans-serif" font-size="72" font-weight="800" text-anchor="middle" fill="url(#textGradient)">
+    4
+    <tspan dx="10">0</tspan>
+    <tspan dx="10">4</tspan>
+  </text>
+  
+  <!-- Subtitle
+  <text x="200" y="220" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="500" text-anchor="middle" fill="#64748b">
+    Page Not Found
+  </text> -->
+  
+  <!-- Decorative path elements -->
+  <path d="M100 250 Q150 240 200 250 T300 250" stroke="#06b6d4" stroke-width="2" fill="none" opacity="0.4">
+    <animate attributeName="stroke-dasharray" values="0,300;150,150;300,0;0,300" dur="4s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Small geometric shapes -->
+  <polygon points="60,160 70,140 80,160" fill="#10b981" opacity="0.3">
+    <animateTransform attributeName="transform" type="rotate" values="0 70 153;360 70 153" dur="8s" repeatCount="indefinite"/>
+  </polygon>
+  
+  <rect x="315" y="245" width="8" height="8" fill="#3b82f6" opacity="0.4" rx="2">
+    <animateTransform attributeName="transform" type="rotate" values="0 319 249;45 319 249;0 319 249" dur="3s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Document/page icon (representing missing content) -->
+  <g transform="translate(120, 60)" opacity="0.3">
+    <rect x="0" y="0" width="20" height="26" rx="2" fill="#64748b"/>
+    <rect x="2" y="4" width="12" height="2" rx="1" fill="white"/>
+    <rect x="2" y="8" width="16" height="2" rx="1" fill="white"/>
+    <rect x="2" y="12" width="10" height="2" rx="1" fill="white"/>
+    <animateTransform attributeName="transform" type="translate" values="120,60;125,55;120,60" dur="2s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Broken link icon -->
+  <g transform="translate(260, 70)" opacity="0.4">
+    <path d="M2 8 L8 2 M8 8 L2 2" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="5" cy="5" r="6" stroke="#ef4444" stroke-width="1.5" fill="none" stroke-dasharray="2,2"/>
+    <animateTransform attributeName="transform" type="translate" values="260,70;265,65;260,70" dur="2.2s" repeatCount="indefinite"/>
+  </g>
+</svg>

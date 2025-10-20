@@ -1,0 +1,220 @@
+import { useForm } from "react-hook-form";
+import { UserStates } from "../context";
+import { MdClose } from "react-icons/md";
+import { useRevalidator } from "react-router";
+import { toast } from "@functions/toast/toast";
+import Modal from "@components/interfaces/Modal";
+import { Button, ScrollArea } from "@radix-ui/themes";
+import { useContext, useEffect, useState } from "react";
+import useStudentApi from "@hooks/api/admin/useStudent.api";
+import { getSchoolsService } from "@services/admin.service";
+import {
+  classStandardDataSelect,
+  sectionDataSelect,
+} from "@utils/classStandardData";
+import InputControlled from "@components/interfaces/Controlled/InputControlled";
+import SelectControlled from "@components/interfaces/Controlled/SelectControlled";
+import { booksCategories, genders, roles } from "@data/selectOptions";
+import type { TBook } from "@types_/user";
+
+type TOption = {
+  value: string;
+  label: string;
+};
+
+function BookAdd() {
+  const { setIsAddModalOpen, isAddModalOpen } = useContext(UserStates);
+  const { createStudent, loading, updateStudent } = useStudentApi();
+  const [optionSchools, setOptionSchools] = useState<TOption[]>([]);
+  const { revalidate } = useRevalidator();
+  const isEdit = isAddModalOpen.editData.name;
+
+  const {
+    control,
+    register,
+    reset,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>();
+
+  useEffect(() => {
+    if (isEdit) {
+      reset(isAddModalOpen.editData);
+      // setValue("school", isAddModalOpen.editData.school?._id);
+    }
+  }, []);
+
+  const submitFrom = async (params: any) => {
+    const apiCall = isEdit ? updateStudent : createStudent;
+
+    toast.processing(apiCall(params), {
+      loadingText: "Adding User..",
+      successText: () => {
+        revalidate();
+        setIsAddModalOpen({ isOpen: false, editData: {} as TBook });
+        return "user added successfully";
+      },
+      errorText: (response) => response.data.error,
+    });
+  };
+
+  const getLocationsOptions = async (value: boolean) => {
+    if (value && optionSchools.length === 0) {
+      const result = await getSchoolsService(undefined, "plain");
+      if (result.schools.length === 0) {
+        return setOptionSchools([{ value: "-1", label: "Schools not found" }]);
+      }
+      const options = result.schools.map((item: any) => ({
+        value: item._id,
+        label: item.schoolName,
+      }));
+      setOptionSchools(options);
+    }
+  };
+
+  return (
+    <Modal open={true} className="!max-w-[45pc]" size="1">
+      <ScrollArea type="hover" scrollbars="vertical">
+        <form
+          className="space-y-3 sm:space-y-6 p-2 sm:p-5"
+          onSubmit={handleSubmit(submitFrom)}
+        >
+          <div className="mb-4 sm:mb-6 flex justify-between">
+            <div>
+              <h3 className="font-semibold tracking-tight text-xl">
+                {isEdit ? "Edit" : "Add new"} book
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
+                Please fill in the form below to {isEdit ? "edit" : "add a new"}{" "}
+                book
+              </p>
+            </div>
+            <MdClose
+              onClick={() =>
+                setIsAddModalOpen(({ isOpen }) => ({
+                  isOpen: !isOpen,
+                  editData: {} as TBook,
+                }))
+              }
+              className="cursor-pointer"
+              size={20}
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="bookName"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Book Name <span className="text-red-500">*</span>
+              </label>
+              <SelectControlled
+                isRequired
+                control={control}
+                name="bookName"
+                errors={errors}
+                options={roles}
+                placeholder="Select book name"
+                errorMessage="book name is required"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="basePrice"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Base Price (₹) <span className="text-red-500">*</span>
+              </label>
+              <InputControlled
+                isRequired
+                errors={errors}
+                register={register}
+                name="basePrice"
+                placeholder="Enter base price"
+                errorMessage="base price is required"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="mrp"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                MRP (₹) <span className="text-red-500">*</span>
+              </label>
+              <InputControlled
+                isRequired
+                name="mrp"
+                errors={errors}
+                register={register}
+                errorMessage="mrp is required"
+                placeholder="Enter mrp in ₹"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="quantity"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Quantity <span className="text-red-500">*</span>
+              </label>
+              <InputControlled
+                isRequired
+                name="quantity"
+                errors={errors}
+                register={register}
+                errorMessage="quantity is required"
+                placeholder="Enter quantity"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="quantity"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Category <span className="text-red-500">*</span>
+              </label>
+              <SelectControlled
+                isRequired
+                control={control}
+                name="category"
+                errors={errors}
+                options={booksCategories}
+                placeholder="Select category"
+                errorMessage="category is required"
+              />
+            </div>
+          </div>
+          <div className="flex justify-end gap-3 pt-4">
+            <Button
+              onClick={() =>
+                setIsAddModalOpen({
+                  isOpen: false,
+                  editData: {} as TBook,
+                })
+              }
+              variant="soft"
+              size="3"
+              radius="medium"
+              color="gray"
+              disabled={loading}
+            >
+              Close
+            </Button>
+            <Button
+              type="submit"
+              disabled={loading}
+              variant="solid"
+              size="3"
+              radius="medium"
+            >
+              {isEdit ? "Update" : "Add"} Book
+            </Button>
+          </div>
+        </form>
+      </ScrollArea>
+    </Modal>
+  );
+}
+
+export default BookAdd;
