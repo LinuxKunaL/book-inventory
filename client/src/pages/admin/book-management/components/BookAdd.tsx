@@ -49,9 +49,6 @@ function BookAdd() {
       const bookValue: any = bookData.find(
         (book: any) => book.label === isAddModalOpen.editData.bookName
       );
-
-console.log(bookValue);
-
       setValue("bookNameTemp", bookValue?.value);
       // setValue("school", isAddModalOpen.editData.school?._id);
     }
