@@ -83,7 +83,7 @@ function BookAdd() {
       },
       errorText: (response) => response.data.error,
     });
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleBookNameChange = (value: any) => {
