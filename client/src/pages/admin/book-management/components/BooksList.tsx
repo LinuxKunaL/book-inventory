@@ -8,6 +8,7 @@ import { Table, Tooltip, IconButton } from "@radix-ui/themes";
 import ItemsNotFound from "@components/others/ItemsNotFound";
 import type { TBook } from "@types_/user";
 import api from "@servicesOther/axios.api";
+import { toast } from "sonner";
 
 function BooksList() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function BooksList() {
   }, []);
 
   const handleOpenEdit = (data: any) => {
-    // setIsAddModalOpen({ isOpen: true, editData: data });
+    setIsAddModalOpen({ isOpen: true, editData: data });
   };
 
   return (
@@ -67,7 +68,7 @@ function BooksList() {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {data?.map((book) => (
+                {data?.map((book: any) => (
                   <Table.Row align="center">
                     <Table.RowHeaderCell>
                       <div className="flex items-center gap-1">
@@ -94,20 +95,29 @@ function BooksList() {
                       <Span>{book.category}</Span>
                     </Table.Cell>
                     <Table.Cell>
-                      {/* <div className="flex gap-2">
-                        <Tooltip content="Delete User">
+                      <div className="flex gap-2">
+                        <Tooltip content="Delete book">
                           <IconButton
                             radius="medium"
                             color="red"
                             variant="soft"
-                            onClick={() => navigate(`/admin/user/${book}/view`)}
+                            onClick={() => {
+                              api
+                                .post("/admin/deleteBook", {
+                                  id: book._id,
+                                })
+                                .then((res) => {
+                                  toast.success(res.data.message);
+                                  window.location.reload();
+                                });
+                            }}
                           >
                             <MdDelete size={16} />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip content="Edit User">
+                        <Tooltip content="Edit book">
                           <IconButton
-                            // onClick={() => handleOpenEdit(student)}
+                            onClick={() => handleOpenEdit(book)}
                             radius="medium"
                             color="sky"
                             variant="soft"
@@ -115,7 +125,7 @@ function BooksList() {
                             <MdEdit size={16} />
                           </IconButton>
                         </Tooltip>
-                      </div> */}
+                      </div>
                     </Table.Cell>
                   </Table.Row>
                 ))}

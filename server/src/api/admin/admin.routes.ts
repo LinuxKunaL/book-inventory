@@ -81,6 +81,24 @@ router.post("/updateOrder", async (req, res) => {
   }
 });
 
+router.post("/deleteBook", async (req, res) => {
+  try {
+    await MBook.findByIdAndDelete(req.body.id);
+    res.status(200).send({ message: "Book deleted" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post("/updateBook", async (req, res) => {
+  try {
+    await MBook.findByIdAndUpdate(req.body._id, req.body);
+    res.status(200).send({ message: "Book updated" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.post("/createOrder", async (req: any, res) => {
   try {
     await MOrder.create({
