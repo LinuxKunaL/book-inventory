@@ -12,16 +12,19 @@ import { toast } from "sonner";
 
 function BooksList() {
   const navigate = useNavigate();
-  const { setIsAddModalOpen } = useContext(UserStates);
+  const { setIsAddModalOpen, isAddModalOpen } = useContext(UserStates);
   const [pageParam, setPageParam] = useSearchParams({ page: "1" });
 
   const [data, setData] = useState<TBook[]>([]);
 
   useEffect(() => {
-    api.get("/admin/getBooks").then((res) => {
-      setData(res.data);
-    });
-  }, []);
+    // wrong practice
+    if (isAddModalOpen.isOpen == false) {
+      api.get("/admin/getBooks").then((res) => {
+        setData(res.data);
+      });
+    }
+  }, [isAddModalOpen]);
 
   const handleOpenEdit = (data: any) => {
     setIsAddModalOpen({ isOpen: true, editData: data });

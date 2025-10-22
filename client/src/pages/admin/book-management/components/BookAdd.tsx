@@ -68,7 +68,7 @@ function BookAdd() {
       // window.location.reload();
       return;
     }
-    
+
     if (params.bookNameTemp != "other") {
       setValue("bookName", params.bookNameTemp);
     }
