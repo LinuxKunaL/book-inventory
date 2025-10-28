@@ -24,7 +24,7 @@ const _config: Config = {
   ],
   port: 3000,
   db: {
-    url: "mongodb://localhost:27017/bookStore",
+    url: process.env.DB_URL,
   },
   fast2sms_api_key:
     "026WIDwSiQVeFAXfad4r37BvJuYsRcOo1p9bPMUyz5ZlmLjqxhAakybzEi0SjWqDNtReh1vQKlTwJmMd",
